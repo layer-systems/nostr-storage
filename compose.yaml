@@ -12,7 +12,8 @@ services:
     volumes:
       - ./data:/var/syncthing
   web:
-    image: php:8.0-apache
+    # image: php:8.0-apache
+    build: .
     container_name: web
     restart: unless-stopped
     ports:
@@ -20,6 +21,7 @@ services:
       - 443:443
     user: "1000:1000"
     volumes:
+      - ./ssl:/etc/apache2/ssl
       - ./data/Sync:/var/www/html/file/
       - ./frontend:/var/www/html/
     depends_on:
