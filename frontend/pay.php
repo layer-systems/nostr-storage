@@ -8,13 +8,14 @@ $fileSizeMb = $fileSize / 1000000;
 $toPay = round($fileSizeMb * $satsProMb, 0);
 $lnbitsKey = "YOUR_LNBITS_KEY_HERE";
 
-echo $toPay;
+// echo $toPay;
 
 // Define your endpoint
 $url = 'https://legend.lnbits.com/api/v1/payments';
 
 // Define your headers
 $headers = array(
+    'Content-Type: application/json',
     'X-Api-Key: '.$lnbitsKey,
 );
 
@@ -25,10 +26,13 @@ $data = array(
     'memo' => $file, 
     'expiry' => 0, 
     'unit' => 'sat',
-    'webhook' => '',
+    // 'webhook' => '',
     'internal' => false
 );
 $body = json_encode($data);
+
+// echo $body;
+// exit();
 
 // Set up your CURL request
 $ch = curl_init();
