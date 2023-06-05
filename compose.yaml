@@ -1,0 +1,29 @@
+version: '3'
+services:
+  syncthing:
+    image: syncthing/syncthing
+    container_name: syncthing
+    restart: unless-stopped
+    ports:
+      - 8384:8384
+      - 22000:22000
+      - 21027:21027/udp
+    hostname: syncthing
+    volumes:
+      # - ./config:/var/syncthig/config
+      - ./data:/var/syncthing
+  web:
+    # image: nginx:alpine
+    image: php:8.0-apache
+    container_name: web
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      # - ./nginx/conf.d:/etc/nginx/conf.d
+      # - ./nginx/ssl:/etc/nginx/ssl
+      # - ./data/storage:/usr/share/nginx/html/storage/
+      - ./data/storage:/var/www/html/storage/
+      - ./frontend:/var/www/html/
+      # - ./data:/var/syncthing
