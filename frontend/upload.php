@@ -3,7 +3,7 @@ $target_dir = "file/";
 $temp_dir = "temp/";
 $uploadOk = 1;
 $fileNeedsPayment = 0;
-$maxFreeSize = 100000; // 0.1MB
+$maxFreeSize = 10000000; // 10MB
 $maxSize = 1000000000; // 1000MB
 $imageFileType = strtolower(pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION));
 
