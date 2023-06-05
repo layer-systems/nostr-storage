@@ -15,11 +15,16 @@ if(isset($_POST["submit"])) {
   }
 }
 
+// Hash the file for the filename
+// $file_hash = md5($_FILES["fileToUpload"]["name"]);
+$file_hash = hash_file('sha256', $_FILES["fileToUpload"]["tmp_name"]);
+$target_file = $target_dir . $file_hash . "." . $imageFileType;
+
 // Check if file already exists
-do {
-    $file_hash = md5(microtime() . $_FILES["fileToUpload"]["name"]);
-    $target_file = $target_dir . $file_hash . "." . $imageFileType;
-} while (file_exists($target_file));
+if (file_exists($target_file)) {
+  echo $_SERVER['SERVER_NAME']."/file/".$file_hash . "." . $imageFileType;
+  $uploadOk = 0;
+}
 
 // Check file size
 if ($_FILES["fileToUpload"]["size"] > 5000000) {
@@ -36,7 +41,7 @@ if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg
 
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
-  echo "Sorry, your file was not uploaded.";
+  // echo "Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
 } else {
   if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
