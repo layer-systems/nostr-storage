@@ -22,7 +22,7 @@ $target_file = $target_dir . $file_hash . "." . $imageFileType;
 
 // Check if file already exists
 if (file_exists($target_file)) {
-  $fileUrl = "http://".$_SERVER['SERVER_NAME']."/file/".$file_hash . "." . $imageFileType;
+  $fileUrl = "https://".$_SERVER['SERVER_NAME']."/file/".$file_hash . "." . $imageFileType;
   // echo $fileUrl;
   header('Location: '.$fileUrl);
   exit();
@@ -48,7 +48,7 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
   if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-    $fileUrl = "http://".$_SERVER['SERVER_NAME']."/file/".$file_hash . "." . $imageFileType;
+    $fileUrl = "https://".$_SERVER['SERVER_NAME']."/file/".$file_hash . "." . $imageFileType;
     // echo $fileUrl;
     header('Location: '.$fileUrl);
     exit();
