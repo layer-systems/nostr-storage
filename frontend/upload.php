@@ -3,6 +3,8 @@ $target_dir = "file/";
 $temp_dir = "temp/";
 $uploadOk = 1;
 $fileNeedsPayment = 0;
+$maxFreeSize = 100000; // 0.1MB
+$maxSize = 1000000000; // 1000MB
 $imageFileType = strtolower(pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION));
 
 // Check if image file is a actual image or fake image
@@ -33,10 +35,10 @@ if (file_exists($target_file)) {
 
 // Check file size
 // if ($_FILES["fileToUpload"]["size"] > 50000000) { // 50MB
-if ($_FILES["fileToUpload"]["size"] > 100000) { // 0.1MB
+if ($_FILES["fileToUpload"]["size"] > $maxFreeSize) {
   $fileNeedsPayment = 1;
 }
-if ($_FILES["fileToUpload"]["size"] > 1000000000) { // 1000MB
+if ($_FILES["fileToUpload"]["size"] > $maxSize) { // 1000MB
   echo "Sorry, your file is too large.";
   $uploadOk = 0;
 }
