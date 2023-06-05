@@ -1,6 +1,8 @@
 <?php
 $target_dir = "file/";
+$temp_dir = "temp/";
 $uploadOk = 1;
+$fileNeedsPayment = 0;
 $imageFileType = strtolower(pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION));
 
 // Check if image file is a actual image or fake image
@@ -30,7 +32,11 @@ if (file_exists($target_file)) {
 }
 
 // Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000000) { // 500MB
+// if ($_FILES["fileToUpload"]["size"] > 50000000) { // 50MB
+if ($_FILES["fileToUpload"]["size"] > 100000) { // 0.1MB
+  $fileNeedsPayment = 1;
+}
+if ($_FILES["fileToUpload"]["size"] > 1000000000) { // 1000MB
   echo "Sorry, your file is too large.";
   $uploadOk = 0;
 }
@@ -47,13 +53,24 @@ if ($uploadOk == 0) {
   // echo "Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
 } else {
-  if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-    $fileUrl = "https://".$_SERVER['SERVER_NAME']."/file/".$file_hash . "." . $imageFileType;
-    // echo $fileUrl;
-    header('Location: '.$fileUrl);
+  if($fileNeedsPayment == 1) {
+    // echo "Sorry, your file is too large. Please pay to upload this file.";
+    // Move file to a temp folder and redirect user to pay page
+    $target_file = $temp_dir . $file_hash . "." . $imageFileType;
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+      // Redirect user to pay page
+      header('Location: https://'.$_SERVER['SERVER_NAME'].'/pay.php?file='.$file_hash . "." . $imageFileType);
+    }
     exit();
   } else {
-    echo "Sorry, there was an error uploading your file.";
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+      $fileUrl = "https://".$_SERVER['SERVER_NAME']."/file/".$file_hash . "." . $imageFileType;
+      // echo $fileUrl;
+      header('Location: '.$fileUrl);
+      exit();
+    } else {
+      echo "Sorry, there was an error uploading your file.";
+    }
   }
 }
 ?>
