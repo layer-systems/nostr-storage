@@ -35,7 +35,7 @@
 <body>
     <h1>Image Hosting Platform</h1>
     <form enctype="multipart/form-data" action="upload.php" method="POST">
-        <input type="file" name="fileToUpload" id="fileToUpload" accept=".jpg,.png,.gif,.mp4,.ogg,.webm" required />
+        <input type="file" name="fileToUpload" id="fileToUpload" accept=".jpg,.jpeg,.png,.gif,.mp4,.ogg,.webm" required />
         <input type="submit" value="Upload" />
     </form>
 </body>
