@@ -25,6 +25,7 @@ services:
       - ./php.ini:/usr/local/etc/php/php.ini
       - ./data/Sync:/var/www/html/file/
       - ./frontend:/var/www/html/
+      - ./000-default.conf:/etc/apache2/sites-available/000-default.conf
     depends_on:
       - syncthing
     command: bash -c "sleep 5 && apache2-foreground"
