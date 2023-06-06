@@ -25,6 +25,8 @@ $headers = array(
     'X-Api-Key: '.$lnbitsKey,
 );
 
+$webhookUrl = 'https://'.$_SERVER['SERVER_NAME'].'/webhook.php?file='.$file;
+
 // Define your payload/body
 $data = array(
     'out' => false, 
@@ -32,7 +34,7 @@ $data = array(
     'memo' => $file, 
     'expiry' => 0, 
     'unit' => 'sat',
-    // 'webhook' => '',
+    'webhook' => $webhookUrl,
     'internal' => false
 );
 $body = json_encode($data);
