@@ -2,6 +2,8 @@
 
 require_once("config.php");
 
+$uploadOk = 1;
+$fileNeedsPayment = 0;
 $imageFileType = strtolower(pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION));
 
 // Check if image file is a actual image or fake image
