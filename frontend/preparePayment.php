@@ -62,10 +62,12 @@ curl_close($ch);
 
 // Print the response
 // echo $response;
-// echo json_decode($response, true)['payment_request'];
+// exit();
 
 $invoice = json_decode($response, true)['payment_request'];
+$paymentHash = json_decode($response, true)['payment_hash'];
+$checkingId = json_decode($response, true)['checking_id'];
 
-header('Location: '.$httpPrefix.$_SERVER['SERVER_NAME'].'/pay.php?invoice='.$invoice.'&file='.$file);
+header('Location: '.$httpPrefix.$_SERVER['SERVER_NAME'].'/pay.php?invoice='.$invoice.'&file='.$file.'&paymentHash='.$paymentHash);
 
 ?>

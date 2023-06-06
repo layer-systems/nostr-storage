@@ -4,6 +4,7 @@ require_once("config.php");
 
 $filename = $_GET['file'];
 $invoice = $_GET['invoice'];
+$paymentHash = $_GET['paymentHash'];
 
 ?>
 
@@ -201,7 +202,7 @@ $invoice = $_GET['invoice'];
             <div class="card-body">
                 <h5 class="card-title">Invoice</h5>
                 <p class="card-text">Pay this invoice to get your file stored.</p>
-                <a href="check.php?file=<?php echo $filename; ?>&invoice=<?php echo $invoice; ?>" class="btn btn-primary">Check if paid</a>
+                <a href="check.php?file=<?php echo $filename; ?>&invoice=<?php echo $invoice; ?>&paymentHash=<?php echo $paymentHash; ?>" class="btn btn-primary">Check if paid</a>
             </div>
         </div>
         <hr />
