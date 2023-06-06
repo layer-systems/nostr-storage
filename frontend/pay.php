@@ -204,6 +204,15 @@ $invoice = $_GET['invoice'];
                 <!-- <a href="#" class="btn btn-primary">Check if paid</a> -->
             </div>
         </div>
+        <hr />
+        <div class="card mx-auto" style="width: 18rem;">
+            <img id="imgFile" src="#" class="card-img-top" alt="Image File">
+            <div class="card-body">
+                <h5 class="card-title">Preview</h5>
+                <p class="card-text">This file is not stored yet! Please pay the invoice first.</p>
+                <!-- <a href="#" class="btn btn-primary">Check if paid</a> -->
+            </div>
+        </div>
     </div>
   </div>
 
@@ -222,8 +231,11 @@ $invoice = $_GET['invoice'];
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     
     <script>
-        img = document.getElementById("payment-qr");
-        img.src = "https://legend.lnbits.com/api/v1/qrcode/<?php echo $invoice; ?>";
+        qr = document.getElementById("payment-qr");
+        qr.src = "https://legend.lnbits.com/api/v1/qrcode/<?php echo $invoice; ?>";
+
+        imgFile = document.getElementById("imgFile");
+        imgFile.src = "<?php echo $temp_dir . $filename; ?>";
     </script>
   </body>
 </html>
