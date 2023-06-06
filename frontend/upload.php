@@ -61,7 +61,7 @@ if ($uploadOk == 0) {
     $target_file = $temp_dir . $file_hash . "." . $imageFileType;
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
       // Redirect user to pay page
-      header('Location: https://'.$_SERVER['SERVER_NAME'].'/pay.php?file='.$file_hash . "." . $imageFileType);
+      header('Location: https://'.$_SERVER['SERVER_NAME'].'/preparePayment.php?file='.$file_hash . "." . $imageFileType);
     }
     exit();
   } else {
