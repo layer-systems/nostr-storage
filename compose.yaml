@@ -24,6 +24,7 @@ services:
       - ./ssl:/etc/apache2/ssl
       - ./php.ini:/usr/local/etc/php/php.ini
       - ./data/Sync:/var/www/html/file/
+      - ./data/temp:/var/www/html/temp/
       - ./frontend:/var/www/html/
       - ./000-default.conf:/etc/apache2/sites-available/000-default.conf
     depends_on:
