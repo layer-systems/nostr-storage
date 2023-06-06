@@ -201,7 +201,7 @@ $invoice = $_GET['invoice'];
             <div class="card-body">
                 <h5 class="card-title">Invoice</h5>
                 <p class="card-text">Pay this invoice to get your file stored.</p>
-                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                <!-- <a href="#" class="btn btn-primary">Check if paid</a> -->
             </div>
         </div>
     </div>
