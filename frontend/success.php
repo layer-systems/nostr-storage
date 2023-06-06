@@ -1,6 +1,7 @@
 <?php
 
-$file_dir = "file/";
+require_once("config.php");
+
 $filename = $_GET['file'];
 
 ?>
@@ -221,7 +222,7 @@ $filename = $_GET['file'];
     
     <script>
         imgFile = document.getElementById("imgFile");
-        imgFile.src = "<?php echo $file_dir . $filename; ?>";
+        imgFile.src = "<?php echo $target_dir . $filename; ?>";
     </script>
   </body>
 </html>

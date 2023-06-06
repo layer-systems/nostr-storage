@@ -1,10 +1,7 @@
 <?php
-$target_dir = "file/";
-$temp_dir = "temp/";
-$uploadOk = 1;
-$fileNeedsPayment = 0;
-$maxFreeSize = 10000000; // 10MB
-$maxSize = 1000000000; // 1000MB
+
+require_once("config.php");
+
 $imageFileType = strtolower(pathinfo($_FILES["fileToUpload"]["name"], PATHINFO_EXTENSION));
 
 // Check if image file is a actual image or fake image
@@ -26,7 +23,7 @@ $target_file = $target_dir . $file_hash . "." . $imageFileType;
 
 // Check if file already exists
 if (file_exists($target_file)) {
-  $fileUrl = "https://".$_SERVER['SERVER_NAME']."/file/".$file_hash . "." . $imageFileType;
+  $fileUrl = $httpPrefix.$_SERVER['SERVER_NAME']."/file/".$file_hash . "." . $imageFileType;
   // echo $fileUrl;
   header('Location: '.$fileUrl);
   exit();
@@ -61,12 +58,12 @@ if ($uploadOk == 0) {
     $target_file = $temp_dir . $file_hash . "." . $imageFileType;
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
       // Redirect user to pay page
-      header('Location: https://'.$_SERVER['SERVER_NAME'].'/preparePayment.php?file='.$file_hash . "." . $imageFileType);
+      header('Location: '.$httpPrefix.$_SERVER['SERVER_NAME'].'/preparePayment.php?file='.$file_hash . "." . $imageFileType);
     }
     exit();
   } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-      $fileUrl = "https://".$_SERVER['SERVER_NAME']."/file/".$file_hash . "." . $imageFileType;
+      $fileUrl = $httpPrefix.$_SERVER['SERVER_NAME']."/file/".$file_hash . "." . $imageFileType;
       // echo $fileUrl;
       header('Location: '.$fileUrl);
       exit();

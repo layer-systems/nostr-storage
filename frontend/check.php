@@ -1,6 +1,7 @@
 <?php
 
-$temp_dir = "temp/";
+require_once("config.php");
+
 $filename = $_GET['file'];
 $invoice = $_GET['invoice'];
 

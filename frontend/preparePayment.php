@@ -1,6 +1,7 @@
 <?php
 
-$temp_dir = "temp/";
+require_once("config.php");
+
 $file = $_GET['file'];
 
 // Exit if file does not exist in temp folder (waiting for payment)
@@ -9,12 +10,9 @@ if(!file_exists($temp_dir . $file)) {
     exit();
   }
 
-$satsProMb = 50;
-$fileSize = filesize($temp_dir . $file);
-$fileSizeMb = $fileSize / 1000000;
-$toPay = round($fileSizeMb * $satsProMb, 0);
-$lnbitsKey = "YOUR_LNBITS_KEY_HERE";
-
+  $fileSize = filesize($temp_dir . $file);
+  $fileSizeMb = $fileSize / 1000000;
+  $toPay = round($fileSizeMb * $satsProMb, 0);
 
 // Define your endpoint
 $url = 'https://legend.lnbits.com/api/v1/payments';
@@ -25,7 +23,7 @@ $headers = array(
     'X-Api-Key: '.$lnbitsKey,
 );
 
-$webhookUrl = 'https://'.$_SERVER['SERVER_NAME'].'/webhook.php?file='.$file;
+$webhookUrl = $httpPrefix.$_SERVER['SERVER_NAME'].'/webhook.php?file='.$file;
 
 // Define your payload/body
 $data = array(
@@ -68,6 +66,6 @@ curl_close($ch);
 
 $invoice = json_decode($response, true)['payment_request'];
 
-header('Location: https://'.$_SERVER['SERVER_NAME'].'/pay.php?invoice='.$invoice.'&file='.$file);
+header('Location: '.$httpPrefix.$_SERVER['SERVER_NAME'].'/pay.php?invoice='.$invoice.'&file='.$file);
 
 ?>

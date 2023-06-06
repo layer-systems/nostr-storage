@@ -7,10 +7,10 @@
 // If paid, move file from temp to storage
 // MAYBE: If not paid, redirect to pay.php
 
-$temp_dir = "temp/";
-$file_dir = "file/";
+require_once("config.php");
+
 $filename = $_GET['file'];
 // $invoice = $_GET['invoice'];
 
-rename($temp_dir . $filename, $file_dir . $filename);
+rename($temp_dir . $filename, $target_dir . $filename);
 ?>
